@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Gmail
+Exec=/home/jcat/.docker_apps/bin/gmail
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Network;GNOME;GTK;
+Icon=/home/jcat/.docker_apps/src/gmail/app-icon.png
+X-MultipleArgs=false
+StartupWMClass=Chromium-browser

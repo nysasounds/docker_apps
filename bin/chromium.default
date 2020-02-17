@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+NAME="${0##*/}"
+CONF="${0%/*}/../.config/${NAME}"
+
+[ -n "${NAME}" ] || exit 1
+[ -d "${CONF}" ] || mkdir "${CONF}"
+
+echo "${NAME}"
+
+
+docker stop "${NAME}" >/dev/null 2>&1 || true
+docker rm "${NAME}" 2>/dev/null || true
+xhost +"local:root@"
+
+# No DBUS #
+#docker run -t --rm \
+#	--net host \
+#	--cpuset-cpus 0 --memory 512mb \
+#	--security-opt apparmor=unconfined \
+#	--security-opt seccomp=$HOME/.docker_apps/etc/seccomp/docker/seccomp/chrome.json \
+#	--device /dev/dri:/dev/dri \
+#	--device /dev/snd \
+#	-e DISPLAY=unix$DISPLAY \
+#	-v /tmp/.X11-unix:/tmp/.X11-unix \
+#	-v $HOME/Downloads:/home/chromium/Downloads \
+#	-v "${HOME}/.docker_apps/.config/${NAME}/:/data" \
+#	-v /var/run/dbus:/var/run/dbus \
+#	-v /dev/shm:/dev/shm \
+#	--name chromium nysasounds/chromium
+
+# DBUS #
+docker run -t --rm \
+	--net host \
+	--cpuset-cpus 0 --memory 512mb  \
+	--security-opt apparmor=unconfined \
+	--security-opt seccomp=$HOME/.docker_apps/etc/seccomp/docker/seccomp/chrome.json \
+	--device /dev/dri:/dev/dri \
+	--device /dev/snd \
+	-e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
+	-e DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS}" -v ${DBUS_SESSION_BUS_ADDRESS##*=}:${DBUS_SESSION_BUS_ADDRESS##*=} \
+	-v $HOME/Downloads:/home/chromium/Downloads \
+	-v "${HOME}/.docker_apps/.config/${NAME}/:/data" \
+	-v /var/run/dbus:/var/run/dbus \
+	-v /dev/shm:/dev/shm \
+	--name "${NAME}" nysasounds/"${NAME}"
