@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
       fonts-liberation \
       fonts-liberation2 \
       fonts-ubuntu \
-      hicolor-icon-theme \
+      adwaita-icon-theme-full \
       libcanberra-gtk3-module \
       libexif-dev \
       libgl1-mesa-dri \
@@ -23,5 +23,6 @@ RUN apt-get update && apt-get install -y \
       libv4l-0 \
       --no-install-recommends \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && update-alternatives --set x-cursor-theme /usr/share/icons/Adwaita/cursor.theme
 
