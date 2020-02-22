@@ -27,4 +27,4 @@ RUN groupadd -g ${GROUP_ID} chromium && useradd -u ${USER_ID} -g chromium -G aud
 USER chromium
 
 ENTRYPOINT [ "/usr/bin/chromium-browser" ]
-CMD [ "--user-data-dir=/data", "--app=https://mail.google.com/mail/u/0/#inbox" ]
+CMD [ "--user-data-dir=/data", "--app=https://mail.google.com/mail/u/0/#inbox" ,"--name=gmail", "--class=gmail" ]
