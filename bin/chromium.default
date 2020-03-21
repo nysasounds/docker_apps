@@ -34,7 +34,7 @@ xhost +"local:root@"
 # DBUS #
 docker run -t --rm \
 	--net host \
-	--cpuset-cpus 0 --memory 512mb  \
+	--cpuset-cpus 0 --memory 2gb  \
 	--security-opt apparmor=unconfined \
 	--security-opt seccomp=$HOME/.docker_apps/etc/seccomp/docker/seccomp/chrome.json \
 	--device /dev/dri:/dev/dri \
