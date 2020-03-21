@@ -39,6 +39,7 @@ docker run -t --rm \
 	--security-opt seccomp=$HOME/.docker_apps/etc/seccomp/docker/seccomp/chrome.json \
 	--device /dev/dri:/dev/dri \
 	--device /dev/snd \
+	--device /dev/video0 \
 	-e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS}" -v ${DBUS_SESSION_BUS_ADDRESS##*=}:${DBUS_SESSION_BUS_ADDRESS##*=} \
 	-v $HOME/Downloads:/home/chromium/Downloads \
