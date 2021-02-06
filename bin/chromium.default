@@ -42,6 +42,8 @@ docker run -t --rm \
 	--device /dev/video0 \
 	-e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
 	-e DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS}" -v ${DBUS_SESSION_BUS_ADDRESS##*=}:${DBUS_SESSION_BUS_ADDRESS##*=} \
+	-e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
+	-v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native:Z \
 	-v $HOME/Downloads:/home/chromium/Downloads \
 	-v "${HOME}/.docker_apps/.config/${NAME}/:/data" \
 	-v /var/run/dbus:/var/run/dbus \

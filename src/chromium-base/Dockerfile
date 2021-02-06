@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
       libgl1-mesa-glx \
       libpango1.0-0 \
       libv4l-0 \
+      libpulse0 \
       --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
